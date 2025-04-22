@@ -1,14 +1,14 @@
+
 name: Build AutoDrop Installer
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: windows-latest
-     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
     steps:
       - name: Checkout code
@@ -24,10 +24,14 @@ jobs:
 
       - name: Build Electron app
         run: npm run dist
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Upload .exe to GitHub Releases
+        if: success()
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/*.exe
+          files: dist/**/*.exe
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
