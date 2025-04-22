@@ -3,44 +3,54 @@ name: Build AutoDrop Installer
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*.*.*' # Trigger workflow on version tags like v1.0.0
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
+      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
+      # Step 4: Build the Electron app
       - name: Build Electron app
         run: npm run dist
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
+      # Step 5: Create GitHub Release
       - name: Create Release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }} # Ensure it uses the tag name
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
 
+      # Step 6: Upload .exe to GitHub Releases
       - name: Upload .exe to GitHub Releases
-        if: success()
         uses: softprops/action-gh-release@v1
+        if: success()
         with:
           files: dist/**/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      # Step 7: Show the release version
+      - name: Show release version
+        run: echo "Building version ${{ github.ref_name }}"
