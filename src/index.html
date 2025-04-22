@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AutoDrop Desktop</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #111; color: white; }
+    header { background: #222; padding: 20px; font-size: 24px; }
+    .sidebar { float: left; width: 200px; height: 100vh; background: #1a1a1a; padding: 20px; box-sizing: border-box; }
+    .content { margin-left: 200px; padding: 20px; }
+    button { margin-top: 10px; padding: 10px; background: #333; color: white; border: none; cursor: pointer; }
+    button:hover { background: #555; }
+    label { display: block; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <header>AutoDrop</header>
+  <div class="sidebar">
+    <div><strong>Sidebar</strong></div>
+    <button onclick="togglePro()">Toggle Pro Mode</button>
+    <button onclick="toggleGhost()">Toggle Ghost Mode</button>
+  </div>
+  <div class="content">
+    <h2>Dashboard</h2>
+    <p>Status: <span id="status"></span></p>
+    <label>
+      Ghost Mode: <input type="checkbox" id="ghostCheckbox" onchange="saveSettings()" />
+    </label>
+    <label>
+      Pro Mode: <input type="checkbox" id="proCheckbox" onchange="saveSettings()" />
+    </label>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>

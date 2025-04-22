@@ -1,0 +1,25 @@
+{
+  "name": "autodrop-full",
+  "version": "1.0.0",
+  "description": "Fully functional AutoDrop desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.autodrop.desktop",
+    "productName": "AutoDrop",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": "squirrel"
+    }
+  },
+  "devDependencies": {
+    "electron": "^27.1.0",
+    "electron-builder": "^24.14.1"
+  }
+}
