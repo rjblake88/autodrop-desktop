@@ -44,3 +44,6 @@ jobs:
           files: dist/**/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Show release version
+        run: echo "Building version ${{ github.ref_name }}"
