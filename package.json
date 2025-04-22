@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Fully functional AutoDrop desktop app",
   "main": "main.js",
+  "author": "AutoDrop",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder"
