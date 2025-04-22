@@ -11,12 +11,18 @@
   "build": {
     "appId": "com.autodrop.desktop",
     "productName": "AutoDrop",
+    "title": "AutoDrop",
     "directories": {
       "buildResources": "build",
       "output": "dist"
     },
     "win": {
-      "target": "squirrel"
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   },
   "devDependencies": {
