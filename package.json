@@ -1,9 +1,8 @@
 {
-  "name": "autodrop-full",
+  "name": "autodrop-desktop",
   "version": "1.0.0",
-  "description": "Fully functional AutoDrop desktop app",
+  "description": "AutoDrop Desktop Application",
   "main": "main.js",
-  "author": "AutoDrop",
   "scripts": {
     "start": "electron .",
     "dist": "electron-builder"
@@ -12,23 +11,23 @@
     "appId": "com.autodrop.desktop",
     "productName": "AutoDrop",
     "directories": {
-      "buildResources": "build",
       "output": "dist"
     },
+    "files": [
+      "**/*"
+    ],
     "win": {
-      "target": "nsis",
-      "icon": "build/icon.ico"
+      "target": "nsis"
     },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "installerIcon": "build/icon.ico",
-      "uninstallerIcon": "build/icon.ico",
-      "installerHeaderIcon": "build/icon.ico"
+    "publish": {
+      "provider": "github",
+      "owner": "rjblake88",
+      "repo": "autodrop-desktop",
+      "releaseType": "draft"
     }
   },
   "devDependencies": {
-    "electron": "^27.1.0",
+    "electron": "^26.0.12",
     "electron-builder": "^26.0.12"
   }
 }
