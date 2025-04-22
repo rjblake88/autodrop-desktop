@@ -2,8 +2,8 @@ name: Build AutoDrop Installer
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -28,8 +28,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Upload .exe to GitHub Releases
-        if: success()
         uses: softprops/action-gh-release@v1
+        if: success()
         with:
           files: dist/**/*.exe
         env:
