@@ -3,7 +3,7 @@ name: Build AutoDrop Installer
 on:
   push:
     tags:
-      - 'v*.*.*'  # Matches semantic version tags like v1.0.0
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -32,18 +32,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}  # Use only the tag name
+          tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
 
       - name: Upload .exe to GitHub Releases
-        uses: softprops/action-gh-release@v1
         if: success()
+        uses: softprops/action-gh-release@v1
         with:
           files: dist/**/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: Show release version
-        run: echo "Building version ${{ github.ref_name }}"
