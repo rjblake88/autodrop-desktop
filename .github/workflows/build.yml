@@ -3,7 +3,7 @@ name: Build AutoDrop Installer
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'v*.*.*'  # Matches semantic version tags like v1.0.0
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}  # Use only the tag name
           release_name: Release ${{ github.ref_name }}
           draft: false
           prerelease: false
